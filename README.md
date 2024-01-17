@@ -1,4 +1,4 @@
-# Prelucrarea semnalelor
+# Prelucrarea imaginilor cu DFT
 
 - Vom folosi scipy, numpy și matplotlib.
 
