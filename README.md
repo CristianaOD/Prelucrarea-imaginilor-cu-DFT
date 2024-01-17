@@ -6,7 +6,8 @@ from scipy import misc, ndimage
 import numpy as np
 import matplotlib.pyplot as plt
 
-Imaginea cu care lucrăm
+Imaginea cu care lucrăm este:
+
 
 Vom folosi o imagine din setul de date oferit implicit de către scipy.
 
