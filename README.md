@@ -7,8 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 Imaginea cu care lucrăm este:
-
-https://github.com/CristianaOD/Prelucrarea-imaginilor-cu-DFT/blob/main/imagine_prelucrata.png?raw=true
+<img src="https://github.com/CristianaOD/Prelucrarea-imaginilor-cu-DFT/blob/main/imagine_prelucrata.png?raw=true" alt= "photo" width="500" height="350">
 
 Vom folosi o imagine din setul de date oferit implicit de către scipy.
 
