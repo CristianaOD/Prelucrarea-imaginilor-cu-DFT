@@ -1,79 +1,102 @@
 # Prelucrarea-imaginilor-cu-DFT
 
-Vom folosi scipy, numpy și matplotlib.
+- Vom folosi scipy, numpy și matplotlib.
 
 from scipy import misc, ndimage
+
 import numpy as np
+
 import matplotlib.pyplot as plt
 
-Imaginea cu care lucrăm este:
+- Imaginea cu care lucrăm este:
 
 <img src="https://github.com/CristianaOD/Prelucrarea-imaginilor-cu-DFT/blob/main/imagine_prelucrata.png?raw=true" alt= "photo" width="500" height="350">
 
-Vom folosi o imagine din setul de date oferit implicit de către scipy.
+- Vom folosi o imagine din setul de date oferit implicit de către scipy.
 
-- X = misc.face(gray=True)
-- plt.imshow(X, cmap=plt.cm.gray)
-- plt.show()
+X = misc.face(gray=True)
 
-Transformata Fourier a unei imagini
+plt.imshow(X, cmap=plt.cm.gray)
+
+plt.show()
+
+- Transformata Fourier a unei imagini
 
 Transformata Fourier Discretă se extinde ușor la mai multe dimensiuni. Pentru un semnal bidimensional precum o imagine DFT devine:
 
 Ym1,m2=∑n1=0N1−1∑n2=0N2−1xn1,n2e−j2π(m1n1/N1+m2n2/N2)
 
 unde n1 și n2 sunt pozițile pixelilor pe orizontală, respectiv, pe verticală
+
 bin-urile rezultate corespund pozițiilor pixelilor
+
 spectrul este în continuare simetric
+
 proprietățile transformatei DFT 1D sunt respectate și în cazul celei 2D
 
 În continuare vom folosi rutina generală fft2 ce servește mai bine activității de învățare, deși pentru semnale reale ar trebui să folosim rfft2 ce întoarce doar informația esențială (ex. omite simetriile). De asemenea vom analiza spectrul în scală logaritmică pentru a diferenția mai bine magnitudinile bin-urilor DTF.
 
 Y = np.fft.fft2(X)
+
 freq_db = 20*np.log10(abs(Y))
 
 plt.imshow(freq_db)
+
 plt.colorbar()
+
 plt.show()
 
-Operațiile efectuate direct asupra imaginii se reflectă și în spectrul acesteia. Iată un exemplu a unei rotații de 45 de grade:
+- Operațiile efectuate direct asupra imaginii se reflectă și în spectrul acesteia. Iată un exemplu a unei rotații de 45 de grade:
 
 rotate_angle = 45
+
 X45 = ndimage.rotate(X, rotate_angle)
+
 plt.imshow(X45, cmap=plt.cm.gray)
+
 plt.show()
 
 Y45 = np.fft.fft2(X45)
+
 plt.imshow(20*np.log10(abs(Y45)))
+
 plt.colorbar()
+
 plt.show()
 
 
-Momentan pe axe sunt afișate numărul bin-urilor. Pentru a obține frecvențele asociate folosiți fftfreq:
+- Momentan pe axe sunt afișate numărul bin-urilor. Pentru a obține frecvențele asociate folosiți fftfreq:
 
 freq_x = np.fft.fftfreq(X.shape[1])
+
 freq_y = np.fft.fftfreq(X.shape[0])
 
 plt.stem(freq_x, freq_db[:][0])
+
 plt.show()
 
-Atenuarea frecvențelor înalte
+- Atenuarea frecvențelor înalte
 
 Pentru a anula frecvențele de peste un anumit prag freq_cutoff putem pur și simplu anula intrările din spectru și aplica transformata Fourier inversă:
 
 freq_cutoff = 120
 
 Y_cutoff = Y.copy()
+
 Y_cutoff[freq_db > freq_cutoff] = 0
+
 X_cutoff = np.fft.ifft2(Y_cutoff)
+
 X_cutoff = np.real(X_cutoff)    # avoid rounding erros in the complex domain,
                                 # in practice use irfft2
+                                
 plt.imshow(X_cutoff, cmap=plt.cm.gray)
+
 plt.show()
 
-Zgomot
+## Zgomot
 
-Zgomotul alb perturbă în mod egal spectrul semnalului. Este astfel egal distribuit și regăsit în toate bin-urile DFT. Zgomotul color se schimbă de-a lungul frecvențelor.
+- Zgomotul alb perturbă în mod egal spectrul semnalului. Este astfel egal distribuit și regăsit în toate bin-urile DFT. Zgomotul color se schimbă de-a lungul frecvențelor.
 
 Putem adăuga zgomot în limita a pixel_noise pixeli imaginii folosind random.randint:
 
