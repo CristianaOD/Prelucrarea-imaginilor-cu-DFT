@@ -18,9 +18,8 @@ Transformata Fourier a unei imagini
 Transformata Fourier Discretă se extinde ușor la mai multe dimensiuni. Pentru un semnal bidimensional precum o imagine DFT devine:
 
 Ym1,m2=∑n1=0N1−1∑n2=0N2−1xn1,n2e−j2π(m1n1/N1+m2n2/N2)
-unde n1
- și n2
- sunt pozițile pixelilor pe orizontală, respectiv, pe verticală
+
+unde n1 și n2 sunt pozițile pixelilor pe orizontală, respectiv, pe verticală
 bin-urile rezultate corespund pozițiilor pixelilor
 spectrul este în continuare simetric
 proprietățile transformatei DFT 1D sunt respectate și în cazul celei 2D
