@@ -7,13 +7,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 Imaginea cu care lucrăm este:
+
 <img src="https://github.com/CristianaOD/Prelucrarea-imaginilor-cu-DFT/blob/main/imagine_prelucrata.png?raw=true" alt= "photo" width="500" height="350">
 
 Vom folosi o imagine din setul de date oferit implicit de către scipy.
 
-X = misc.face(gray=True)
-plt.imshow(X, cmap=plt.cm.gray)
-plt.show()
+- X = misc.face(gray=True)
+- plt.imshow(X, cmap=plt.cm.gray)
+- plt.show()
 
 Transformata Fourier a unei imagini
 
